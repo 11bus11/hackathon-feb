@@ -5,7 +5,7 @@ from .models import OrgDirectory, Event, Location
 
 
 def events(request):
-    """ See all plays available """
+    """ See all events """
     events = Event.objects.all()
     locations = Location.objects.all()
 
@@ -19,4 +19,11 @@ def events(request):
 
 def donate(request):
     """ Return homepage """
-    return render(request, 'directory/donate.html')
+    orgs = OrgDirectory.objects.all()
+
+    template = "directory/donate.html"
+    context = {
+        'orgs': orgs,
+    }
+
+    return render(request, template, context)
